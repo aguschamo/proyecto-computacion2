@@ -1,4 +1,4 @@
-from core.character import Heroe, Enemigo 
+from src.core.character import Heroe, Enemigo 
 
 #creo los heroes 
 guerrero= Heroe ("agustina", "guerrero")
