@@ -63,4 +63,65 @@ class Batalla:
             daño = heroe.atacar(enemigo_objetivo)
             print(f"{heroe.nombre} ataco a {enemigo_objetivo.nombre} e hizo {daño} de daño")
             if not enemigo_objetivo.esta_vivo():
-                print(f"💀 {enemigo_objetivo.nombre} fue derrotao!")     
+                print(f"💀 {enemigo_objetivo.nombre} fue derrotado!")
+
+            #Drop de item
+            drop = self.gestor_items.drop_aleatorio()
+            if drop:
+                print(f"¡El enemigo dejó caer un ítem: {drop.nombre}!")
+                heroe.usar_item({
+                    "nombre": drop.nombre,
+                    "tipo": drop.tipo,
+                    "efecto": drop.efecto
+                }
+                )
+            
+            elif opcion == "2":
+                print("Ítems disponibles(por ahora simulación simple):")
+                pocion = self.gestor_items.obtener_item_por_nombre("Pocion pequeña")
+                if pocion:
+                    heroe.usar_item({
+                        "nombre": pocion.nombre,
+                        "tipo": pocion.tipo,
+                        "efecto": pocion.efecto
+                    })
+                else:
+                    print("No tienes ítems disponibles.")
+            elif opcion == "3":
+                print(f"{heroe.nombre} decide esperar este turno")
+            else:
+                print("Opción inválida, turno perdido")
+
+    def turno_enemigos(self):
+        #Turno de los enemigos: atacan a héroes aleatorios
+       print("\n--- Turno de los Enemigos ---")
+       heroes_vivos = [h for h in self.heroes if h.esta_vivo()]
+
+       for enemigo in self.enemigos:
+           if enemigo.esta_vivo() and heroes_vivos:
+               objetivo = random.choice(heroes_vivos)
+               daño = enemigo.atacar(objetivo)
+               print(f"{enemigo.nombre} ataco a {objetivo.nombre} e hizo {daño} de daño")
+               if not objetivo.esta_vivo():
+                   print(f"💀 {objetivo.nombre} fue derrotado!")
+        
+    def iniciar(self):
+        """Ejecuta el flujo completo de la batalla hasta que un grupo pierda"""
+        print("\n ¡Comienza la batalla!")
+        while self.todos_vivos (self.heroes) and self.todos_vivos(self.enemigos):
+            print(f"\n--- Turno {self.turno} ---")
+            self.mostrar_estado()
+            self.turno_heroes()
+            if self.todos_vivos(self.enemigos):
+                self.turno_enemigos()
+            self.turno += 1
+
+        print ("\n--- Batalla Terminada ---")
+        if self.todos_vivos(self.heroes):
+            print("¡Los héroes han ganado la batalla!")
+            for h in self.heroes:
+                if h.esta_vivo():
+                    h.ganar_experiencia(50)  # Cada héroe vivo gana 50 de experiencia
+                    print(f"{h.nombre} ganó 50 puntos de experiencia.")
+        else:
+            print("¡Los enemigos han ganado la batalla!")
