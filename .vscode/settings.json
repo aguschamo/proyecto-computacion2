@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./rpg_turn_based/src"
+    ]
+}

@@ -2,43 +2,43 @@ import random
 # CLASE: PERSONAJE 
 class Personaje: 
     
- def __init__(self, nombre, nivel, salud_max, fuerza, defensa): 
-     self.nombre = nombre
-     self.nivel = nivel 
-     self.salud_max = salud_max 
-     self.salud = salud_max #salud actual 
-     self.fuerza = fuerza 
-     self.defensa = defensa 
-        
- def esta_vivo(self): 
-     #Devuelve True si el personaje sigue con vida 
-     return self.salud > 0 
- 
- def recibir_daño (self, daño): 
-     #Resta salud según el daño recibido y la defensa. 
-     #Devuelve el daño efectivo que se aplicó 
-    daño_efectivo = max(0, daño - sel. defensa)
-    self.salud =max(0, self.salud - daño_efectivo)
-    return daño_efectivo
+    def __init__(self, nombre, nivel, salud_max, fuerza, defensa): 
+        self.nombre = nombre
+        self.nivel = nivel
+        self.salud_max = salud_max
+        self.salud = salud_max  # salud actual
+        self.fuerza = fuerza
+        self.defensa = defensa
 
- def atacar(self, otro): 
-     #Realiza un ataque básico. Devuelve el daño infligido
-     #Se agrega una pequeña variación aleatoria al daño 
-     variacion = random.randint(-2, 2)
-     poder = self.fuerza + variacion 
-     daño = otro.recibir_daño(poder)
-     return daño 
- 
- def curar (self, cantidad): 
-     #Restaura salud (sin pasar del máximo)
-     self.salud =min(self.salud + cantidad, self.salud_max)
- 
- def __str__(self):
-     return f"{self.nombre} (Nivel {self.nivel}) - Salud: {self.salud}/{self.salud_max}"
- 
+    def esta_vivo(self):
+        # Devuelve True si el personaje sigue con vida
+        return self.salud > 0
+
+    def recibir_daño (self, daño):
+        # Resta salud según el daño recibido y la defensa.
+        # Devuelve el daño efectivo que se aplicó
+        daño_efectivo = max(0, daño - self.defensa)
+        self.salud = max(0, self.salud - daño_efectivo)
+        return daño_efectivo
+
+    def atacar(self, otro):
+        # Realiza un ataque básico. Devuelve el daño infligido
+        # Se agrega una pequeña variación aleatoria al daño
+        variacion = random.randint(-2, 2)
+        poder = self.fuerza + variacion 
+        daño = otro.recibir_daño(poder)
+        return daño
+
+    def curar (self, cantidad):
+        # Restaura salud (sin pasar del máximo)
+        self.salud = min(self.salud + cantidad, self.salud_max)
+
+    def __str__(self):
+        return f"{self.nombre} (Nivel {self.nivel}) - Salud: {self.salud}/{self.salud_max}"
+
  #CLASE HEROE 
  
- class Heroe(Personaje): 
+class Heroe(Personaje): 
      #representa a un personaje controlado por el jugador 
      #incluye experiencia y subida de nivel 
      
@@ -93,17 +93,17 @@ class Personaje:
 class Enemigo(Personaje):
     #Representa a un enemigo generado aleatoriamente
     #Los atributos dependen del nivel 
-  def __init__(self, nombre, nivel): 
+    def __init__(self, nombre, nivel): 
       salud_max = 50 + 15 * nivel 
       fuerza = 8 + 3 * nivel 
       defensa = 2 + nivel 
       super().__init__(nombre, nivel, salud_max, fuerza, defensa)
 
-@staticmethod
-def generar_aleatorio(nivel_min, nivel_max):
-     #genera un enemigo aleatorio entre un rango de niveles 
-     nombres = ["Globin", "Lobo", "Bandido", "Esqueleto", "Orco", "Arca"]
-     nombre = random.choice(nombres)
-     nivel = random.randint(nivel_min, nivel_max)
-     return Enemigo(nombre, nivel)
+    @staticmethod
+    def generar_aleatorio(nivel_min, nivel_max):
+        #genera un enemigo aleatorio entre un rango de niveles 
+        nombres = ["Globin", "Lobo", "Bandido", "Esqueleto", "Orco", "Arca"]
+        nombre = random.choice(nombres)
+        nivel = random.randint(nivel_min, nivel_max)
+        return Enemigo(nombre, nivel)
  

@@ -1,6 +1,6 @@
 import random 
 from core.character import Heroe, Enemigo 
-from core.item import GestordeItems 
+from core.item import GestorDeItems 
 
 #CLASE BATALLA 
 
