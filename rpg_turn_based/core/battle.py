@@ -51,28 +51,32 @@ class Batalla:
                 if not enemigos_vivos:
                     print("No hay enemigos vivos para atacar")
                     continue
+            #Si hay un solo enemigo, ataca directamente 
+                if len(enemigos_vivos) == 1:
+                    enemigo_objetivo = enemigos_vivos[0]
+                    print(f"{heroe.nombre} ataca directamente a {enemigo_objetivo.nombre}!")
+                else: 
+            #Si hay más de uno, mostrar menú de selección 
+                    for i, enemigo in enumerate(enemigos_vivos, start=1):
+                        print(f"{i}. {enemigo.nombre} ({enemigo.salud}/{enemigo.salud_max})")
 
-                for i, enemigo in enumerate(enemigos_vivos, start=1):
-                    print(f"{i}. {enemigo.nombre} ({enemigo.salud}/{enemigo.salud_max})")
-
-                eleccion = input("Elige enemigo a atacar:")
-                try:
-                    enemigo_objetivo = enemigos_vivos[int(eleccion) - 1]
-                except (ValueError, IndexError):
-                    print("Opción inválida, turno perdido")
+                    eleccion = input("Elige enemigo a atacar:")
+                    try:
+                         enemigo_objetivo = enemigos_vivos[int(eleccion) - 1]
+                    except (ValueError, IndexError):
+                        print("Opción inválida, turno perdido")
                     continue
+            daño = heroe.atacar(enemigo_objetivo)
+            print(f"{heroe.nombre} ataco a {enemigo_objetivo.nombre} e hizo {daño} de daño")
 
-                daño = heroe.atacar(enemigo_objetivo)
-                print(f"{heroe.nombre} ataco a {enemigo_objetivo.nombre} e hizo {daño} de daño")
-
-                if not enemigo_objetivo.esta_vivo():
+            if not enemigo_objetivo.esta_vivo():
                     print(f"{enemigo_objetivo.nombre} fue derrotado!")
 
                 # Drop de ítem
-                drop = self.gestor_items.drop_aleatorio()
-                if drop:
-                    print(f"¡El enemigo dejó caer un ítem: {drop.nombre}!")
-                    heroe.usar_item({
+            drop = self.gestor_items.drop_aleatorio()
+            if drop:
+                print(f"¡El enemigo dejó caer un ítem: {drop.nombre}!")
+                heroe.usar_item({
                     "nombre": drop.nombre,
                     "tipo": drop.tipo,
                     "efecto": drop.efecto
