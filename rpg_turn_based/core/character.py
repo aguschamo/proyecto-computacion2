@@ -78,14 +78,14 @@ class Heroe(Personaje):
             self.salud_max +- 2 
             self.defensa += 1 
             self.salud = self.salud_max #se cura completamente 
-            print(f"🎉 {self.nombre} Felicitaciones, subiste de nivel {self.nivel}!")
+            print(f"{self.nombre} Felicitaciones, subiste de nivel {self.nivel}!")
      
      def usar_item(self, item):
          #aplica el efecto de un item. La estructura de "item" se define en el módulo de ítems
          if item ["tipo"] == "curativo": 
              self.curar(item["efecto"])
-             print(f"{self.nombr} uso {item['nombre']} y recupero {item['efecto']} de salud")
-         elif item ["tipo"] == "mejora": 
+             print(f"{self.nombre} uso {item['nombre']} y recupero {item['efecto']} de salud")
+         elif item ["tipo"] == "mejora":
              self.fuerza += item ["efecto"]
              print(f"{self.nombre} uso {item['nombre']} y aumento su fuerza en {item['efecto']} puntos")
 

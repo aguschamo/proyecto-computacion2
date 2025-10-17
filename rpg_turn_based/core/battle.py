@@ -19,15 +19,15 @@ class Batalla:
     def mostrar_estado(self): 
         #muestra el estado actual de todos los personajes
         print("\n--- ESTADO DE BATALLA ---")
-        print("🧙‍♂️ Héroes:")
+        print("Héroes:")
         for i, h in enumerate(self.heroes, start = 1):
             estado = f"{i}. {h.nombre} ({h.clase.capitalize()}) - Salud {h.salud}/{h.salud_max}"
             print(estado)
         
-        print("\n👹 Enemigos:")
+        print("\nEnemigos:")
         for i, e in enumerate(self.enemigos, start=1): 
-            estado = f"{i}. {e.nombre} -Salud {e.salud}/{e.salud_max}"
-            print (estado)
+            estado = f"{i}. {e.nombre} - Salud {e.salud}/{e.salud_max}"
+            print(estado)
         print("--------------")
     def todos_vivos(self, lista):
          #Devuelve True si al menos uno en la lista está vivo
@@ -63,7 +63,7 @@ class Batalla:
             daño = heroe.atacar(enemigo_objetivo)
             print(f"{heroe.nombre} ataco a {enemigo_objetivo.nombre} e hizo {daño} de daño")
             if not enemigo_objetivo.esta_vivo():
-                print(f"💀 {enemigo_objetivo.nombre} fue derrotado!")
+                print(f"{enemigo_objetivo.nombre} fue derrotado!")
 
             #Drop de item
             drop = self.gestor_items.drop_aleatorio()
@@ -103,7 +103,7 @@ class Batalla:
                daño = enemigo.atacar(objetivo)
                print(f"{enemigo.nombre} ataco a {objetivo.nombre} e hizo {daño} de daño")
                if not objetivo.esta_vivo():
-                   print(f"💀 {objetivo.nombre} fue derrotado!")
+                   print(f"{objetivo.nombre} fue derrotado!")
         
     def iniciar(self):
         """Ejecuta el flujo completo de la batalla hasta que un grupo pierda"""
