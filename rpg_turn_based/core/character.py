@@ -44,7 +44,9 @@ class Heroe(Personaje):
      
      def __init__ (self, nombre, clase, nivel = 1): 
          self.clase = clase.lower()
-         self.experiencia = 0 
+         self.experiencia = 0
+         self.inventario = []
+
         #atributos base según la clase del héroe 
          if self.clase =="guerrero":
               salud_max = 120
@@ -65,6 +67,7 @@ class Heroe(Personaje):
              defensa = 5
          
          super().__init__(nombre, nivel, salud_max, fuerza, defensa)
+
      def ganar_experiencia(self, cantidad): 
          #suma experiencia. si supere el umbral, sube de nivel 
          #cada nivel requiere nivel_actual * 100 puntos 
@@ -72,12 +75,12 @@ class Heroe(Personaje):
          experiencia_necesaria = self.nivel * 100 
          
          #subida de nivel 
-         if self.experiencia <= experiencia_necesaria: 
-            self.experiencia -= experiencia_necesaria 
-            self.nivel += 1 
-            self.salud_max +- 2 
-            self.defensa += 1 
-            self.salud = self.salud_max #se cura completamente 
+         if self.experiencia >= experiencia_necesaria: 
+            self.experiencia -= experiencia_necesaria
+            self.nivel += 1
+            self.salud_max += 2
+            self.defensa += 1
+            self.salud = self.salud_max  # se cura completamente
             print(f"{self.nombre} Felicitaciones, subiste de nivel {self.nivel}!")
      
      def usar_item(self, item):

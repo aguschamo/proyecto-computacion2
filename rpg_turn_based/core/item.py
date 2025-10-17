@@ -64,3 +64,10 @@ class GestorDeItems:
                     self.items.append(item)
         except Exception as e:
             print(f"Error al leer los ítems: {e}")
+
+    def drop_aleatorio(self):
+        """Devuelve un ítem aleatorio como drop, o None si no hay ítems."""
+        if not self.items:
+            print("No hay ítems disponibles para drop.")
+            return None
+        return random.choice(self.items)

@@ -33,64 +33,77 @@ class Batalla:
          #Devuelve True si al menos uno en la lista está vivo
         return any(p.esta_vivo() for p in lista)
     
-    def turno_heroes(self): 
-        #Turno de los héroes: el juegador elige acciones para cada héroe vivo
+    def turno_heroes(self):
+    # Turno de los héroes: el jugador elige acciones para cada héroe vivo
         for heroe in self.heroes:
             if not heroe.esta_vivo():
-                continue
-            
-            print(f"\nTurno de {heroe.nombre} ({heroe.clase.capitalize()})") 
+             continue
+        
+            print(f"\nTurno de {heroe.nombre} ({heroe.clase.capitalize()})")
             print("1. Atacar")
             print("2. Usar ítem")
             print("3. Pasar turno")
-            opcion = input ("Elige una opción:")
-            
-            if opcion == "1": 
-                #Mostar enemigos vivos 
+            opcion = input("Elige una opción:")
+
+            if opcion == "1":
+            # Mostrar enemigos vivos
                 enemigos_vivos = [e for e in self.enemigos if e.esta_vivo()]
                 if not enemigos_vivos:
                     print("No hay enemigos vivos para atacar")
-                    continue 
-            for i, enemigo in enumerate(enemigos_vivos, start = 1): 
-                print(f"{i}. {enemigo.nombre} ({enemigo.salud}/{enemigo.salud_max})")
-                
-            eleccion = input ("Elige enemigo a atacar:")
-            try: 
-                enemigo_objetivo = enemigos_vivos [int(eleccion) - 1]
-            except (ValueError, IndexError): 
-                print("Opcion inválida, turno perdido")
-                continue 
-            daño = heroe.atacar(enemigo_objetivo)
-            print(f"{heroe.nombre} ataco a {enemigo_objetivo.nombre} e hizo {daño} de daño")
-            if not enemigo_objetivo.esta_vivo():
-                print(f"{enemigo_objetivo.nombre} fue derrotado!")
+                    continue
 
-            #Drop de item
-            drop = self.gestor_items.drop_aleatorio()
-            if drop:
-                print(f"¡El enemigo dejó caer un ítem: {drop.nombre}!")
-                heroe.usar_item({
+                for i, enemigo in enumerate(enemigos_vivos, start=1):
+                    print(f"{i}. {enemigo.nombre} ({enemigo.salud}/{enemigo.salud_max})")
+
+                eleccion = input("Elige enemigo a atacar:")
+                try:
+                    enemigo_objetivo = enemigos_vivos[int(eleccion) - 1]
+                except (ValueError, IndexError):
+                    print("Opción inválida, turno perdido")
+                    continue
+
+                daño = heroe.atacar(enemigo_objetivo)
+                print(f"{heroe.nombre} ataco a {enemigo_objetivo.nombre} e hizo {daño} de daño")
+
+                if not enemigo_objetivo.esta_vivo():
+                    print(f"{enemigo_objetivo.nombre} fue derrotado!")
+
+                # Drop de ítem
+                drop = self.gestor_items.drop_aleatorio()
+                if drop:
+                    print(f"¡El enemigo dejó caer un ítem: {drop.nombre}!")
+                    heroe.usar_item({
                     "nombre": drop.nombre,
                     "tipo": drop.tipo,
                     "efecto": drop.efecto
-                }
-                )
-            
+                })
+
             elif opcion == "2":
-                print("Ítems disponibles(por ahora simulación simple):")
-                pocion = self.gestor_items.obtener_item_por_nombre("Pocion pequeña")
-                if pocion:
-                    heroe.usar_item({
-                        "nombre": pocion.nombre,
-                        "tipo": pocion.tipo,
-                        "efecto": pocion.efecto
-                    })
-                else:
-                    print("No tienes ítems disponibles.")
+                if not heroe.inventario:
+                    print(f"{heroe.nombre} no tiene ítems para usar.")
+                    continue
+
+                print("Ítems disponibles:")
+                for i, item in enumerate(heroe.inventario, start=1):
+                    print(f"{i}. {item['nombre']} ({item['tipo']}) → {item['efecto']}")
+
+                eleccion_item = input("Elige el ítem a usar: ")
+                try:
+                    item_seleccionado = heroe.inventario[int(eleccion_item) - 1]
+                except (ValueError, IndexError):
+                    print("Opción inválida, turno perdido")
+                    continue
+
+                heroe.usar_item(item_seleccionado)
+                # Opcional: remover el ítem del inventario si es de un solo uso
+                heroe.inventario.pop(int(eleccion_item) - 1)
+
             elif opcion == "3":
-                print(f"{heroe.nombre} decide esperar este turno")
+                print(f"{heroe.nombre} decide esperar este turno.")
+
             else:
-                print("Opción inválida, turno perdido")
+                print("Opción inválida, turno perdido.")
+
 
     def turno_enemigos(self):
         #Turno de los enemigos: atacan a héroes aleatorios
