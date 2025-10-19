@@ -7,16 +7,16 @@ from core.character import Heroe, Enemigo
 class SaveManager:
     """Maneja el guardado y carga de partidas usando archivos JSON.
     Guarda los datos esenciales: heroe, enemigos y turno actual"""
-    def __init__(self, ruta_archivo= 'data/savegame.json'): 
+    def __init__(self, ruta_archivo= 'rpg_turn_based/data/savegame.json'): 
         self.ruta_archivo = ruta_archivo
     
     # Guarda una partida en un archivo JSON
     def guardar_partida(self, heroes, enemigos, turno):
         """Guarda el estado actual de la partida en un archivo JSON"""
         datos_guardar = {
-            "heroes": [self._serializar_personaje(h) for h in heroes], #convierte objetos Heroe a diccionarios
-            "enemigos": [self._serializar_personaje(e) for e in enemigos], #convierte objetos Enemigo a diccionarios
-            "turno": turno 
+            "heroes": [self._personaje_a_dict(h) for h in heroes], 
+            "enemigos": [self._personaje_a_dict(e) for e in enemigos],
+            "turno": turno # conserva el turno actual
         }
         os.makedirs(os.path.dirname(self.ruta_archivo), exist_ok=True) #asegura que la carpeta exista
         with open(self.ruta_archivo, "w", encoding="utf-8") as archivo: #abre el archivo para escribir

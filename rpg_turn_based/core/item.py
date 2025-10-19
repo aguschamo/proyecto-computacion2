@@ -3,9 +3,8 @@ import json
 import random
 import os
 
-# -------------------------------------------------------
+
 # CLASE ITEM
-# -------------------------------------------------------
 class Item:
     """
     Representa un ítem del juego. 
@@ -21,10 +20,7 @@ class Item:
     def __str__(self):
         return f"{self.nombre} ({self.tipo}) → {self.descripcion}"
 
-
-# -------------------------------------------------------
 # CLASE GESTOR DE ITEMS
-# -------------------------------------------------------
 class GestorDeItems:
     """
     Administra la carga de ítems desde un archivo JSON

@@ -25,6 +25,7 @@ class MenuPrincipal:
             elif opcion == "3":
                 print("¡Gracias por jugar! Hasta la próxima aventura.")
                 time
+                # Break the loop to exit
                 break
             else:
                 print("\n Opción inválida, por favor intenta de nuevo.")
@@ -40,9 +41,13 @@ class MenuPrincipal:
         heroes = [heroe1, heroe2, heroe3]
 
         gestor = GestorDeMazmorras(heroes)
-        gestor. jugar()
+        resultado = gestor.jugar()
+        # Si el jugador eligió abandonar la partida desde una batalla, volver al menú
+        if resultado == "salir":
+            print("Volviendo al menú principal.")
+            return
 
-        #al final permitir guardar
+        # Al terminar la aventura normalmente, permitir guardar
         opcion = input("\n¿Deseas guardar la partida? (s/n): ")
         if opcion.lower() == "s": 
             self.save_manager.guardar_partida(gestor.heroes, [], 0)  # enemigos y turno iniciales
@@ -58,4 +63,7 @@ class MenuPrincipal:
         print("\n Cargando tu aventura...\n")
         time.sleep(1)
         gestor = GestorDeMazmorras(heroes)
-        gestor.jugar()
+        resultado = gestor.jugar()
+        if resultado == "salir":
+            print("Volviendo al menú principal.")
+            return

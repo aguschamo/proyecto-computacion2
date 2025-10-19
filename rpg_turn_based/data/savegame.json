@@ -1,0 +1,49 @@
+{
+    "heroes": [
+        {
+            "tipo": "Heroe",
+            "nombre": "Agustina",
+            "nivel": 1,
+            "salud": 120,
+            "salud_max": 120,
+            "fuerza": 15,
+            "defensa": 8,
+            "clase": "guerrero",
+            "experiencia": 50
+        },
+        {
+            "tipo": "Heroe",
+            "nombre": "Coti",
+            "nivel": 1,
+            "salud": 74,
+            "salud_max": 80,
+            "fuerza": 20,
+            "defensa": 4,
+            "clase": "mago",
+            "experiencia": 50
+        },
+        {
+            "tipo": "Heroe",
+            "nombre": "Tadeo",
+            "nivel": 1,
+            "salud": 95,
+            "salud_max": 95,
+            "fuerza": 13,
+            "defensa": 6,
+            "clase": "arquero",
+            "experiencia": 50
+        }
+    ],
+    "enemigos": [
+        {
+            "tipo": "Enemigo",
+            "nombre": "Lobo",
+            "nivel": 2,
+            "salud": 80,
+            "salud_max": 80,
+            "fuerza": 14,
+            "defensa": 4
+        }
+    ],
+    "turno": 1
+}

@@ -3,9 +3,9 @@ from core.character import Heroe, Enemigo
 import time
 import random 
 
-#Clase Mazmorra 
-#Representa una mazmorra dentro del juego: cada mazmorra tiene: 
-#un nombre, una descripcion narrativa, un numero de enemigos, un jefe final
+"""Clase Mazmorra 
+Representa una mazmorra dentro del juego: cada mazmorra tiene: 
+un nombre, una descripcion narrativa, un numero de enemigos, un jefe final"""
 
 class Mazmorra:    
     def __init__(self, nombre, descripcion, enemigos,jefe): 
@@ -59,19 +59,29 @@ class GestorDeMazmorras:
                 print(f"Combate {num + 1} en la {mazmorra.nombre}...")
                 batalla = Batalla(self.heroes)
                 batalla.generar_enemigos(cantidad =1, nivel_min=i, nivel_max=i + 1)
-                batalla.iniciar()
+                resultado = batalla.iniciar()
+                if resultado == "salir":
+                    # El jugador decidió abandonar y volver al menú
+                    return "salir"
                 
                 if not any(h.esta_vivo() for h in self.heroes): 
-                    print("\n ¡El jefe final aparece! ({mazmorra.jefe})")
-                    jefe = Enemigo(mazmorra.jefe, nivel=i + 2)
-                    batalla_jefe = Batalla(self.heroes)
-                    batalla_jefe.enemigos = [jefe]
-                    batalla_jefe.iniciar()
+                    print("\n Todos los héroes cayeron... Fin de la aventura")
+                    return False
+                
+                #ahora toca el jefe final de la mazmorra
+                print(f"\n Prepárate para enfrentar al jefe de la {mazmorra.nombre}...\n")
+                time.sleep(1.5)
+                jefe = Enemigo(mazmorra.jefe, nivel=i + 2)
+                batalla_jefe = Batalla(self.heroes)
+                batalla_jefe.enemigos = [jefe]
+                resultado_jefe = batalla_jefe.iniciar()
+                if resultado_jefe == "salir":
+                    return "salir"
                     
-                    if not any(h.esta_vivo() for h in self.heroes): 
-                        print("\n Todos los héroes cayeron... Fin de la aventura")
-                        return False 
-                    print(f"\n Has conquistado la {mazmorra.nombre}.\n")
-                    time.sleep(1.5)
+                if not any(h.esta_vivo() for h in self.heroes): 
+                    print("\n Todos los héroes cayeron... Fin de la aventura")
+                    return False 
+                print(f"\n Has conquistado la {mazmorra.nombre}.\n")
+                time.sleep(1.5)
             print("\n ¡Felicitaciones! Has completado todas las mazmorras y derrotado al jefe final")
             return True 
