@@ -4,8 +4,8 @@ import time
 import random 
 
 """Clase Mazmorra 
-Representa una mazmorra dentro del juego: cada mazmorra tiene: 
-un nombre, una descripcion narrativa, un numero de enemigos, un jefe final"""
+Representa un santuario o lugar del mundo natural, con su atmósfera,
+enemigos espirituales y un guardián ancestral al final."""
 
 class Mazmorra:    
     def __init__(self, nombre, descripcion, enemigos,jefe): 
@@ -14,13 +14,13 @@ class Mazmorra:
         self.enemigos = enemigos 
         self.jefe = jefe 
     
-    def introducir(self): #Muestra la introduccion narrativa de la mazmorra
-        print(f"Entrás a la {self.nombre}...")
-        time.sleep(1.2)
-        print(self.descripcion)
-        time.sleep(1.5)
-        print("Te preparás para el combate...\n")
-        time.sleep(1.2)
+    def introducir(self): #Narrativa de introducción a la mazmorra
+        print(f"\n Entrás en {self.nombre}...")
+        time.sleep(5)
+        print(f" {self.descripcion}")
+        time.sleep(5)
+        print("Sentís una energía ancestral vibrar en el aire...\n")
+        time.sleep(5)
 
 #Clase Gestor de Mazmorras 
 #Controla el avance entre las diferentes mazmorras
@@ -33,55 +33,69 @@ class GestorDeMazmorras:
         self.mazmorras = self.crear_mazmorras()
     
     def crear_mazmorras(self):
-#Crea las 3 mazmorras del juego con sus descripciones 
+#Crea las mazmorras del mundo Ghibli  
         return [
             Mazmorra(
-                "Mazmorra del Bosque Oscuro",
-                "Los árboles susurran mientras criaturas acechan entre las sombras. El aire huele a humedad y miedo.", 
+                "Bosque de los Susurros",
+                "Los árboles se mueven suavemente como si respiraran. Pequeños espíritus de musgo te observan desde las raíces.", 
                 enemigos = 2, 
-                jefe = "Lobo Alfa"
+                jefe = "Espíritu del Roble Ancestral"
             ),
             Mazmorra(
-                "Mazmorra del Volcán Carmesí", 
-                "El calor es insoportable. El suelo tiembla y la lava ilumina las paredes... tu destino te espera.", 
+                "Ruinas del Vientos Antiguo", 
+                "Entre columnas cubiertas de enredaderas, el aire canta melodías antiguas. Algo poderoso duerme bajo las piedras.", 
                 enemigos = 3,
-                jefe = "Dragón de Fuego"
+                jefe = "Guardían del Eco"
+            ), 
+            Mazmorra(
+                "Santuario de la luna"
+                "Un lago plateado refleja el cielo estrellado. Los espíritus flotan sobre el agua, susurrando plegarias olvidadas", 
+                enemigos = 3, 
+                jefe = "Sombra del Reflejo Lunar"
             )
         ]
     def jugar(self): 
-#Ejecuta el recorrido completo de las mazmorras
-        print("\n Comienza tu aventura a través de las mazmorras...\n")
+#Ejecuta el recorrido narrativo y de combate de las mazmorras"
+        print("\n Comienza su travesía por los Santuarios del Bosque Eterno...\n")
+        time.sleep(5)
         
         for i, mazmorra in enumerate(self.mazmorras, start =1):
             mazmorra.introducir()
-#Batallas contra enemigos normales 
+            # --- Combates Normales ---
             for num in range(mazmorra.enemigos): 
-                print(f"Combate {num + 1} en la {mazmorra.nombre}...")
+                print(f"Encuentro {num + 1} en {mazmorra.nombre}...")
+                time.sleep(5)
                 batalla = Batalla(self.heroes)
-                batalla.generar_enemigos(cantidad =1, nivel_min=i, nivel_max=i + 1)
+                batalla.generar_enemigos(cantidad=1, nivel_min=i, nivel_max=i + 1)
                 resultado = batalla.iniciar()
+                
                 if resultado == "salir":
                     # El jugador decidió abandonar y volver al menú
                     return "salir"
                 
                 if not any(h.esta_vivo() for h in self.heroes): 
-                    print("\n Todos los héroes cayeron... Fin de la aventura")
+                    print("\n Todos los espíritus protectores han caído...")
+                    print("El bosque guarda silencio una vez más")
                     return False
                 
-                #ahora toca el jefe final de la mazmorra
-                print(f"\n Prepárate para enfrentar al jefe de la {mazmorra.nombre}...\n")
-                time.sleep(1.5)
+                # --- Jefe Final --- 
+                print(f"\n Se aproxima una presencia poderosa")
+                time.sleep(5)
                 jefe = Enemigo(mazmorra.jefe, nivel=i + 2)
                 batalla_jefe = Batalla(self.heroes)
                 batalla_jefe.enemigos = [jefe]
                 resultado_jefe = batalla_jefe.iniciar()
+                
                 if resultado_jefe == "salir":
+                    print("\n Has abandonado tu destino... por ahora.")
                     return "salir"
                     
                 if not any(h.esta_vivo() for h in self.heroes): 
-                    print("\n Todos los héroes cayeron... Fin de la aventura")
-                    return False 
-                print(f"\n Has conquistado la {mazmorra.nombre}.\n")
-                time.sleep(1.5)
-            print("\n ¡Felicitaciones! Has completado todas las mazmorras y derrotado al jefe final")
+                    print("\n Todos los héroes han caído bajo la luna.")
+                    time.slepp(5)
+                    
+                print(f"\n Has purificado {mazmorra.nombre}. Los espíritus descansan en paz\n")
+                time.sleep(5)
+            print("\n ¡Has completado todos los santuarios del Bosque Eterno!")
+            print("El equilibrio ha sido restaurado.\n")
             return True 
