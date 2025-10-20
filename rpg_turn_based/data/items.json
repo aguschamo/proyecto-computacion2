@@ -1,44 +1,45 @@
 [
     { 
-        "nombre": "Poción de Vida",
+        "nombre": "Semilla de Luz",
         "tipo": "curativo",
         "efecto": 30,
-        "descripcion": "Restaura 30 puntos de vida."  
+        "descripcion": "Una semilla cálida que late con vida. Restaura 30 puntos de energía vital."
     },
     {
-        "nombre": "Elixir de Fuerza",
+        "nombre": "Té de Luciernas",
         "tipo": "curativo",
         "efecto": 60,
-        "descripcion": "Restaura 60 puntos de salud."
+        "descripcion": "Un brebaje que brilla suvamente en la oscuridad. Restaura 60 puntos de salud."
     },
     {
-        "nombre": "Elixir mágico",
+        "nombre": "Pétalo de Luna",
         "tipo": "curativo",
         "efecto": 100,
-        "descripcion": "Restaura completamente la salud del usuario."
+        "descripcion": "Flores que solo florecen bajo la luna llena. Restaura completamente la salud del personaje."
     },
     {
-        "nombre": "Anillo de fuerza",
+        "nombre": "Hoja susurrante",
         "tipo": "mejora",
         "efecto": 3,
-        "descripcion": "Aumenta la fuerza del usuario en 3 puntos."
+        "descripcion": "Una hoja que vibra al ritmo del bosque. Aumenta la fuerza del usuario en 3 puntos."
     },
+
     {
-        "nombre": "Anillo de fuerza",
-        "tipo": "mejora",
-        "efecto": 3,
-        "descripcion": "Aumenta la fuerza del usuario en 3 puntos."
-    },
-    {
-        "nombre": "Anillo de fuerza",
-        "tipo": "mejora",
-        "efecto": 3,
-        "descripcion": "Aumenta la fuerza del personaje en 3 puntos."
-    },
-    { 
-        "nombre": "Escudo reforzado",
+        "nombre": "Cristaña del Viento",
         "tipo": "mejora",
         "efecto": 2,
-        "descripcion": "Aumenta la defensa del usuario en 2 puntos."
+        "descripcion": "Un fragmento de aire antiguo que protege con suavidad. Aumenta la defensa del usuario en 2 puntos."
+    },
+    { 
+        "nombre": "Fragmento de Recuerdo",
+        "tipo": "mejora",
+        "efecto": 4,
+        "descripcion": "Un eco del pasado que despierta la determinación interior. Aumenta la fuerza en 4 puntos."
+    },
+    {
+        "nombre": "Raíz Ancestral",
+        "tipo": "mejora",
+        "efecto": 5,
+        "descripcion": "Absorbe la energía de la tierra profunda. Incrementa la defensa del usuario en 5 puntos."
     }
 ]
