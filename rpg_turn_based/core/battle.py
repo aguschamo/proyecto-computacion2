@@ -17,7 +17,10 @@ class Batalla:
     
     def generar_enemigos(self, cantidad, nivel_min, nivel_max): 
         #genera una lista de enemigos aleatorios
-        self.enemigos = [Enemigo.generar_aleatorio(nivel_min, nivel_max) for _ in range(cantidad)]
+        enemigos = []
+        for _ in range(cantidad):
+            enemigos.append(Enemigo.generar_aleatorio(nivel_min, nivel_max))
+        self.enemigos = enemigos
     
     def mostrar_estado(self): 
         #muestra el estado actual de todos los personajes
@@ -52,7 +55,10 @@ class Batalla:
 
             if opcion == "1":
                 # Mostrar enemigos vivos
-                enemigos_vivos = [e for e in self.enemigos if e.esta_vivo()]
+                enemigos_vivos = []
+                for e in self.enemigos:
+                    if e.esta_vivo():
+                        enemigos_vivos.append(e)
                 if not enemigos_vivos:
                     print("No hay enemigos vivos para atacar")
                     continue
@@ -131,7 +137,10 @@ class Batalla:
     def turno_enemigos(self):
         #Turno de los enemigos: atacan a héroes aleatorios
         print("\n--- Turno de los Enemigos ---")
-        heroes_vivos = [h for h in self.heroes if h.esta_vivo()]
+        heroes_vivos = []
+        for h in self.heroes:
+            if h.esta_vivo():
+                heroes_vivos.append(h)
 
         for enemigo in self.enemigos:
             if enemigo.esta_vivo() and heroes_vivos:

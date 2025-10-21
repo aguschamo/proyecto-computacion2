@@ -48,7 +48,7 @@ class GestorDeMazmorras:
                 jefe = "Guardían del Eco"
             ), 
             Mazmorra(
-                "Santuario de la luna"
+                "Santuario de la luna",
                 "Un lago plateado refleja el cielo estrellado. Los espíritus flotan sobre el agua, susurrando plegarias olvidadas", 
                 enemigos = 3, 
                 jefe = "Sombra del Reflejo Lunar"

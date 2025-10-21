@@ -44,7 +44,7 @@ class GestorDeItems:
     def cargar_items(self):
         """Carga los ítems desde un archivo JSON."""
         if not os.path.exists(self.ruta_archivo):
-            print(f"Archivo de ítems no encontrado: {self.ruta_archivo}")
+            print(f"No se encontró el archivo de ítems: {self.ruta_archivo}")
             return
 
         try:

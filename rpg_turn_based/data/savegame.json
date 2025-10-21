@@ -2,48 +2,48 @@
     "heroes": [
         {
             "tipo": "Heroe",
-            "nombre": "San",
+            "nombre": "Elaria",
             "nivel": 1,
             "salud": 120,
             "salud_max": 120,
             "fuerza": 15,
             "defensa": 8,
             "clase": "guardiana del bosque",
-            "experiencia": 50
+            "experiencia": 0
         },
         {
             "tipo": "Heroe",
-            "nombre": "Nausicaä",
+            "nombre": "Kael",
             "nivel": 1,
-            "salud": 74,
+            "salud": 72,
             "salud_max": 80,
             "fuerza": 20,
             "defensa": 4,
-            "clase": "alquimista del viento",
-            "experiencia": 50
+            "clase": "alquimista del aire",
+            "experiencia": 0
         },
         {
             "tipo": "Heroe",
-            "nombre": "Haku",
+            "nombre": "Lyra",
             "nivel": 1,
             "salud": 95,
             "salud_max": 95,
             "fuerza": 13,
             "defensa": 6,
             "clase": "viajero del sueño",
-            "experiencia": 50
+            "experiencia": 0
         }
     ],
     "enemigos": [
         {
             "tipo": "Enemigo",
-            "nombre": "Lobo",
+            "nombre": "Sombras del Valle",
             "nivel": 2,
-            "salud": 80,
+            "salud": 12,
             "salud_max": 80,
             "fuerza": 14,
             "defensa": 4
         }
     ],
-    "turno": 1
+    "turno": 4
 }

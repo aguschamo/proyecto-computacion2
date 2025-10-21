@@ -14,10 +14,14 @@ class SaveManager:
     def guardar_partida(self, heroes, enemigos, turno):
         """Guarda el estado actual de la partida en un archivo JSON"""
         datos_guardar = {
-            "heroes": [self._personaje_a_dict(h) for h in heroes], 
-            "enemigos": [self._personaje_a_dict(e) for e in enemigos],
+            "heroes": [],
+            "enemigos": [],
             "turno": turno # conserva el turno actual
         }
+        for h in heroes:
+            datos_guardar["heroes"].append(self._personaje_a_dict(h))
+        for e in enemigos:
+            datos_guardar["enemigos"].append(self._personaje_a_dict(e))
         os.makedirs(os.path.dirname(self.ruta_archivo), exist_ok=True) #asegura que la carpeta exista
         with open(self.ruta_archivo, "w", encoding="utf-8") as archivo: #abre el archivo para escribir
             json.dump(datos_guardar, archivo, indent=4, ensure_ascii=False) #guarda los datos en formato JSON
@@ -33,8 +37,12 @@ class SaveManager:
         with open(self.ruta_archivo, "r", encoding="utf-8") as archivo: #abre el archivo para leer
             datos = json.load(archivo) #carga los datos desde el archivo JSON
             
-        heroes = [self._dict_a_heroe(h_data) for h_data in datos["heroes"]] #convierte diccionarios a objetos Heroe
-        enemigos = [self._dict_a_enemigo(e_data) for e_data in datos["enemigos"]] #convierte diccionarios a objetos Enemigo
+        heroes = []
+        for h_data in datos["heroes"]:
+            heroes.append(self._dict_a_heroe(h_data))
+        enemigos = []
+        for e_data in datos["enemigos"]:
+            enemigos.append(self._dict_a_enemigo(e_data))
         turno = datos.get("turno", 1) # Valor por defecto 1 si no existe
 
         print(f"Partida cargada exitosamente desde '{self.ruta_archivo}'.")
