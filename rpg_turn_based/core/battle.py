@@ -85,16 +85,16 @@ class Batalla:
                 if not enemigo_objetivo.esta_vivo():
                     print(f"{enemigo_objetivo.nombre} fue derrotado!")
 
-                # DROP DE ÍTEM
-                drop = self.gestor_items.drop_aleatorio()
-                if drop and random.random() < 0.5:  # 50% de probabilidad de que el héroe recoja el ítem
-                    print(f"¡El enemigo dejó caer un ítem: {drop.nombre}!")
-                    heroe.inventario.append({
-                        "nombre": drop.nombre,
-                        "tipo": drop.tipo,
-                        "efecto": drop.efecto
-                    })
-                    print(f"¡{heroe.nombre} recogió el ítem: {drop.nombre} y lo ha guardado en su inventario!")
+                    # DROP DE ÍTEM
+                    drop = self.gestor_items.drop_aleatorio()
+                    if drop and random.random() < 0.5:  # 50% de probabilidad de que el héroe recoja el ítem
+                        print(f"¡El enemigo dejó caer un ítem: {drop.nombre}!")
+                        heroe.inventario.append({
+                            "nombre": drop.nombre,
+                            "tipo": drop.tipo,
+                            "efecto": drop.efecto
+                        })
+                        print(f"¡{heroe.nombre} recogió el ítem: {drop.nombre} y lo ha guardado en su inventario!")
 
             elif opcion == "2":
                 if not heroe.inventario:

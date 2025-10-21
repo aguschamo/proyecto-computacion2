@@ -3,47 +3,47 @@
         {
             "tipo": "Heroe",
             "nombre": "Elaria",
-            "nivel": 1,
-            "salud": 120,
-            "salud_max": 120,
+            "nivel": 2,
+            "salud": 122,
+            "salud_max": 122,
             "fuerza": 15,
-            "defensa": 8,
+            "defensa": 9,
             "clase": "guardiana del bosque",
-            "experiencia": 0
+            "experiencia": 50
         },
         {
             "tipo": "Heroe",
             "nombre": "Kael",
-            "nivel": 1,
-            "salud": 72,
-            "salud_max": 80,
+            "nivel": 2,
+            "salud": 77,
+            "salud_max": 82,
             "fuerza": 20,
-            "defensa": 4,
+            "defensa": 5,
             "clase": "alquimista del aire",
-            "experiencia": 0
+            "experiencia": 50
         },
         {
             "tipo": "Heroe",
             "nombre": "Lyra",
-            "nivel": 1,
+            "nivel": 2,
             "salud": 95,
-            "salud_max": 95,
+            "salud_max": 97,
             "fuerza": 13,
-            "defensa": 6,
+            "defensa": 7,
             "clase": "viajero del sueño",
-            "experiencia": 0
+            "experiencia": 50
         }
     ],
     "enemigos": [
         {
             "tipo": "Enemigo",
-            "nombre": "Sombras del Valle",
-            "nivel": 2,
-            "salud": 12,
-            "salud_max": 80,
-            "fuerza": 14,
-            "defensa": 4
+            "nombre": "Espíritu del Roble Ancestral",
+            "nivel": 3,
+            "salud": 84,
+            "salud_max": 95,
+            "fuerza": 17,
+            "defensa": 5
         }
     ],
-    "turno": 4
+    "turno": 1
 }
