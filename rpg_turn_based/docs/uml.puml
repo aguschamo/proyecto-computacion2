@@ -1,0 +1,85 @@
+@startuml RPG Simplificado
+
+' Configuración visual
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam backgroundColor white
+skinparam roundcorner 5
+skinparam linetype ortho
+
+' Colores por grupo funcional
+skinparam class {
+    BackgroundColor<<Personajes>> #E8F8F5
+    BackgroundColor<<Items>> #F4ECF7
+    BackgroundColor<<Gestores>> #FEF5E7
+    BackgroundColor<<UI>> #EBF5FB
+}
+
+package "Entidades del Juego" {
+    abstract class Personaje <<Personajes>> {
+        + nombre
+        + nivel
+        + salud
+    }
+
+    class Heroe <<Personajes>> {
+        + clase
+        + experiencia
+        + inventario
+    }
+
+    class Enemigo <<Personajes>>
+
+    class Item <<Items>> {
+        + nombre
+        + tipo
+        + efecto
+    }
+}
+
+package "Sistema de Juego" {
+    class GestorDeItems <<Gestores>>
+
+    class Batalla <<Gestores>> {
+        + turno
+    }
+
+    class Mazmorra <<Gestores>> {
+        + nombre
+        + descripcion
+    }
+
+    class GestorDeMazmorras <<Gestores>> {
+        + nivel_actual
+    }
+
+    class SaveManager <<Gestores>>
+}
+
+package "Interfaz" {
+    class MenuPrincipal <<UI>>
+}
+
+' Relaciones
+Personaje <|-- Heroe
+Personaje <|-- Enemigo
+
+Batalla o-- GestorDeItems
+Batalla o-- SaveManager
+Batalla --> Heroe : participa >
+Batalla --> Enemigo : enfrenta >
+
+GestorDeMazmorras o-- Mazmorra
+GestorDeMazmorras --> Heroe : gestiona >
+
+GestorDeItems *-- Item
+
+MenuPrincipal o-- SaveManager
+MenuPrincipal --> GestorDeMazmorras : inicia >
+
+' Notas explicativas
+note right of Personaje : "Clase base para\nHéroes y Enemigos"
+
+note bottom of GestorDeMazmorras : "Controla el flujo\ndel juego"
+
+@enduml
